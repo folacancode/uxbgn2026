@@ -1,0 +1,8 @@
+{
+  "name": "8-Week Product Design Starter Plan",
+  "short_name": "Design Plan",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#EEF0F5",
+  "theme_color": "#0D99FF"
+}

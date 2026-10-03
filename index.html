@@ -1,0 +1,593 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>8-Week Product Design Starter Plan</title>
+<meta name="description" content="A self-paced 8-week plan to start product design in Nigeria. Tick tasks off as you go; your progress saves on this device.">
+<meta name="theme-color" content="#0D99FF">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='5' y='5' width='22' height='22' fill='none' stroke='%230D99FF' stroke-width='2.5'/%3E%3Crect x='2' y='2' width='7' height='7' fill='white' stroke='%230D99FF' stroke-width='2'/%3E%3Crect x='23' y='23' width='7' height='7' fill='white' stroke='%230D99FF' stroke-width='2'/%3E%3C/svg%3E">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #EEF0F5;
+  --surface: #FFFFFF;
+  --ink: #16182B;
+  --muted: #5A5F76;
+  --line: #D9DCE6;
+  --select: #0D99FF;
+  --select-soft: #E3F2FF;
+  --done: #14AE5C;
+  --done-soft: #E2F6EA;
+  --code-bg: #F4F5F9;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #14151B;
+    --surface: #1D1F28;
+    --ink: #ECEEF6;
+    --muted: #9CA1B7;
+    --line: #2E3140;
+    --select: #3DADFF;
+    --select-soft: #16304A;
+    --done: #3CC97A;
+    --done-soft: #173A27;
+    --code-bg: #16171E;
+  }
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 76px; }
+@media (min-width: 920px) { html { scroll-padding-top: 24px; } }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Schibsted Grotesk", system-ui, sans-serif;
+  font-size: 17px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--select); text-underline-offset: 3px; }
+a:hover { text-decoration-thickness: 2px; }
+:focus-visible { outline: 2px solid var(--select); outline-offset: 2px; border-radius: 3px; }
+
+.shell {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 16px 96px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+}
+@media (min-width: 920px) {
+  .shell { grid-template-columns: 220px minmax(0, 1fr); gap: 56px; padding: 0 32px 120px; }
+}
+
+/* Hero: the title sits in a Figma-style selection box */
+.hero { grid-column: 1 / -1; padding: 56px 0 8px; }
+.frame-label { font-size: 13px; color: var(--muted); margin: 0 0 10px 2px; }
+.selection {
+  position: relative;
+  display: inline-block;
+  border: 1.5px solid var(--select);
+  padding: 14px 20px 16px;
+  margin: 0 8px;
+}
+.selection .h {
+  position: absolute; width: 9px; height: 9px;
+  background: var(--surface); border: 1.5px solid var(--select);
+}
+.h.tl { top: -5px; left: -5px; } .h.tr { top: -5px; right: -5px; }
+.h.bl { bottom: -5px; left: -5px; } .h.br { bottom: -5px; right: -5px; }
+.selection h1 {
+  margin: 0;
+  font-size: clamp(38px, 7.5vw, 84px);
+  line-height: 0.98;
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  max-width: 11ch;
+}
+.dims {
+  position: absolute; left: 50%; bottom: -30px; transform: translateX(-50%);
+  background: var(--select); color: #fff;
+  font-size: 12px; font-weight: 500; padding: 2px 7px; border-radius: 3px;
+  white-space: nowrap;
+}
+.hero-copy { max-width: 62ch; margin: 56px 0 0; color: var(--muted); font-size: 18px; }
+.hero-copy strong { color: var(--ink); font-weight: 500; }
+
+/* Progress summary */
+.progress-card {
+  margin-top: 28px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 16px 18px;
+  display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px;
+  max-width: 640px;
+}
+.progress-card .count { font-weight: 700; font-size: 20px; }
+.bar { flex: 1 1 200px; height: 8px; background: var(--line); border-radius: 99px; overflow: hidden; }
+.bar > span { display: block; height: 100%; width: 0; background: var(--done); border-radius: 99px; transition: width .3s ease; }
+.progress-card p { margin: 0; flex-basis: 100%; font-size: 14px; color: var(--muted); }
+.progress-card button {
+  font: inherit; font-size: 14px; color: var(--muted); background: none; border: 0; padding: 0;
+  text-decoration: underline; text-underline-offset: 3px; cursor: pointer;
+}
+
+/* Side nav */
+.side { display: none; }
+@media (min-width: 920px) {
+  .side { display: block; }
+  .side nav { position: sticky; top: 24px; }
+}
+.side ol { list-style: none; margin: 0; padding: 0; }
+.side a {
+  display: flex; justify-content: space-between; gap: 8px;
+  padding: 7px 10px; margin: 0 -10px; border-radius: 6px;
+  color: var(--ink); text-decoration: none; font-size: 15px;
+}
+.side a:hover { background: var(--surface); }
+.side a.current { background: var(--select-soft); }
+.side .frac { color: var(--muted); font-variant-numeric: tabular-nums; font-size: 14px; }
+.side .frac.full { color: var(--done); font-weight: 700; }
+.side .group { font-size: 13px; color: var(--muted); margin: 18px 0 6px; }
+.side .group:first-child { margin-top: 0; }
+
+/* Mobile week jumper */
+.jump {
+  position: sticky; top: 0; z-index: 5;
+  margin: 0 -16px; padding: 10px 16px;
+  background: color-mix(in srgb, var(--bg) 92%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+  display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none;
+}
+.jump::-webkit-scrollbar { display: none; }
+.jump a {
+  flex: 0 0 auto; padding: 6px 12px; border-radius: 99px;
+  background: var(--surface); border: 1px solid var(--line);
+  color: var(--ink); text-decoration: none; font-size: 14px;
+}
+.jump a.full { border-color: var(--done); color: var(--done); }
+@media (min-width: 920px) { .jump { display: none; } }
+
+/* Content */
+main { min-width: 0; }
+section { margin-bottom: 64px; }
+h2 {
+  font-size: clamp(26px, 3.4vw, 34px);
+  line-height: 1.1; letter-spacing: -0.02em; font-weight: 800;
+  margin: 0 0 12px;
+}
+h3 { font-size: 19px; margin: 32px 0 10px; letter-spacing: -0.01em; }
+.goal { color: var(--muted); max-width: 62ch; margin: 0 0 20px; }
+.prose p, .prose li { max-width: 66ch; }
+.prose ol { padding-left: 22px; }
+.prose li { margin-bottom: 8px; }
+
+.week-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; }
+.week-head h2 { flex: 1; }
+.week-head .frac { flex: 0 0 auto; color: var(--muted); font-size: 15px; font-variant-numeric: tabular-nums; }
+.week-head .frac.full { color: var(--done); font-weight: 700; }
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.tasks { list-style: none; margin: 0; padding: 0; }
+.tasks li + li { border-top: 1px solid var(--line); }
+.tasks label {
+  display: grid; grid-template-columns: 22px 1fr; gap: 14px;
+  padding: 14px 18px; cursor: pointer; align-items: start;
+}
+.tasks label:hover { background: color-mix(in srgb, var(--select-soft) 45%, transparent); }
+.tasks input {
+  appearance: none; -webkit-appearance: none; margin: 2px 0 0;
+  width: 20px; height: 20px; border: 1.5px solid var(--muted); border-radius: 5px;
+  display: grid; place-content: center; cursor: pointer; background: var(--surface);
+}
+.tasks input::after {
+  content: ""; width: 10px; height: 6px;
+  border-left: 2px solid #fff; border-bottom: 2px solid #fff;
+  transform: rotate(-45deg) translate(1px, -1px) scale(0);
+  transition: transform .15s ease;
+}
+.tasks input:checked { background: var(--done); border-color: var(--done); }
+.tasks input:checked::after { transform: rotate(-45deg) translate(1px, -1px) scale(1); }
+.tasks input:checked + span { color: var(--muted); text-decoration: line-through; text-decoration-color: color-mix(in srgb, var(--muted) 60%, transparent); }
+.tasks input:checked + span a { color: var(--muted); }
+
+.sunday { margin-top: 18px; }
+.sunday .card { background: var(--select-soft); border-color: transparent; }
+.sunday .tasks li + li { border-top-color: color-mix(in srgb, var(--select) 18%, transparent); }
+.sunday-title { font-weight: 700; font-size: 15px; margin: 0 0 8px; }
+
+.briefs { display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); margin: 0 0 22px; padding: 0; list-style: none; }
+.briefs li { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; font-size: 15px; }
+.briefs b { display: block; font-size: 16px; margin-bottom: 2px; }
+.then { font-weight: 700; margin: 0 0 8px; }
+
+pre {
+  background: var(--code-bg); border: 1px solid var(--line); border-radius: 10px;
+  padding: 16px 18px; margin: 0; white-space: pre-wrap; font-size: 15px;
+  font-family: inherit; line-height: 1.6;
+}
+.prompt-wrap { position: relative; max-width: 66ch; }
+.copy {
+  position: absolute; top: 10px; right: 10px;
+  font: inherit; font-size: 13px; font-weight: 500;
+  background: var(--surface); color: var(--ink);
+  border: 1px solid var(--line); border-radius: 6px; padding: 4px 10px; cursor: pointer;
+}
+
+table { width: 100%; border-collapse: collapse; font-size: 15px; }
+th, td { text-align: left; padding: 12px 16px; vertical-align: top; }
+th { font-size: 13px; color: var(--muted); font-weight: 500; border-bottom: 1px solid var(--line); }
+tr + tr td { border-top: 1px solid var(--line); }
+td:last-child, th:last-child { white-space: nowrap; color: var(--muted); }
+.table-scroll { overflow-x: auto; }
+
+.bookmark {
+  margin-top: 14px; font-size: 14px; color: var(--muted); max-width: 640px;
+}
+footer { color: var(--muted); font-size: 14px; border-top: 1px solid var(--line); padding-top: 20px; }
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <header class="hero">
+    <p class="frame-label">Frame 1</p>
+    <div class="selection">
+      <span class="h tl"></span><span class="h tr"></span><span class="h bl"></span><span class="h br"></span>
+      <h1>8-Week Product Design Starter Plan</h1>
+      <span class="dims">8 weeks × 8–10 hrs</span>
+    </div>
+    <p class="hero-copy">By Week 8 you'll have <strong>one case study on a real Nigerian product problem.</strong> Your projects can lead to internship roles, the HNG internship, the Druids cohort, and your first gigs. Requirements: laptop, data, Figma.</p>
+
+    <div class="progress-card" aria-live="polite">
+      <span class="count" id="total-count">0 of 0 done</span>
+      <div class="bar" aria-hidden="true"><span id="total-bar"></span></div>
+      <p>Ticks save on this device and browser only. <button type="button" id="reset">Reset progress</button></p>
+    </div>
+    <p class="bookmark">Bookmark this page so you come back to the same progress: Ctrl+D (Cmd+D on Mac), or "Add to Home screen" from your phone browser's menu.</p>
+  </header>
+
+  <aside class="side">
+    <nav aria-label="Weeks" id="side-nav"></nav>
+  </aside>
+
+  <main>
+    <nav class="jump" aria-label="Jump to week" id="jump-nav"></nav>
+
+    <section id="how" class="prose">
+      <h2>How this works</h2>
+      <p>Three rules:</p>
+      <ol>
+        <li><strong>Make more than you watch.</strong> If a week was all videos and no Figma file, that week didn't count.</li>
+        <li><strong>Design and build, even if it's ugly, then fix it.</strong> Your first screens will look bad. Everyone's did. Finish them anyway.</li>
+        <li><strong>Post your work every Sunday.</strong> On Twitter or LinkedIn. Every post builds your proof of work.</li>
+      </ol>
+
+      <h3>The Sunday check-in (you run it yourself)</h3>
+      <p>No one is checking on you, so you check on yourself. Every Sunday, 30 minutes:</p>
+      <ol>
+        <li><strong>Self-check.</strong> Answer that week's "Sunday check" questions honestly. A "no" means you repeat the task, not move on.</li>
+        <li><strong>AI critique.</strong> Screenshot your work and paste it into Claude or ChatGPT with the prompt below. Treat the answer as a second opinion, not a verdict.</li>
+        <li><strong>Post it.</strong> One post: what you made, what you learned, what's still bad.</li>
+        <li><strong>Swap with a buddy.</strong> Find one other beginner in the <a href="https://t.me/+QulYGlv8tvc0NGE0" target="_blank" rel="noopener">Druids Telegram</a> or <a href="https://friends.figma.com/lagos" target="_blank" rel="noopener">Friends of Figma</a> community and trade work every Sunday.</li>
+      </ol>
+      <p>Twice in the 8 weeks, after Week 4 and Week 8, book a free 30-minute <a href="https://adplist.org/mentors/expertise/product-design/lagos" target="_blank" rel="noopener">ADPList</a> session with a product designer in Lagos. Bring specific questions, not "how do I get a job."</p>
+      <div class="prompt-wrap">
+<pre id="prompt">You're a senior product designer in Lagos reviewing a beginner's work.
+This is my [screen or flow] for [what it does], for [who uses it].
+Give me the 3 biggest problems, ranked, with one specific fix for each.
+Be blunt. Skip anything that's already fine.</pre>
+        <button class="copy" type="button" id="copy-prompt">Copy</button>
+      </div>
+    </section>
+
+    <div id="weeks"></div>
+
+    <section id="after" class="prose">
+      <h2>After Week 8</h2>
+      <p>One case study gets you in the door. This is the usual Nigerian route from here:</p>
+      <ol>
+        <li><strong><a href="https://druids.design/mentorship" target="_blank" rel="noopener">Druids mentorship</a>.</strong> Join the waitlist for the next cohort. It teaches building with AI, finding and pricing clients, and interviews, and it assumes you bring designs you've already made. You will have them.</li>
+        <li><strong>Second project.</strong> Pick a different kind of problem, for example a tool for a small business instead of a fintech flow. Two strong case studies are enough to apply for internships and junior roles.</li>
+        <li><strong><a href="https://hng.tech/internship" target="_blank" rel="noopener">HNG Internship</a>.</strong> It's free and team-based, with a product design track. HNG says plainly it's not for beginners, which is why it comes after this plan. Watch their site for the next cohort.</li>
+        <li><strong>First paid work.</strong> Businesses around you need help: the Instagram vendor with a messy order process, your church or school website, a friend's restaurant menu. Small paid jobs become portfolio pieces.</li>
+      </ol>
+    </section>
+
+    <section id="resources">
+      <h2>Resources</h2>
+      <div class="card table-scroll">
+        <table>
+          <thead><tr><th>Resource</th><th>What it is</th><th>Week</th></tr></thead>
+          <tbody id="resource-rows"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <footer>Made for you to run on your own. Start with Week 1, and post on Sunday.</footer>
+  </main>
+</div>
+
+<script>
+const L = {
+  uxdi: "https://uxdesigninstitute.com/courses/free-ux-design-course",
+  cf: "https://careerfoundry.com/en/short-courses/become-a-ux-designer",
+  figmaCourse: "https://help.figma.com/hc/en-us/articles/30848209492887",
+  figma: "https://www.figma.com/signup",
+  claude: "https://claude.ai",
+  chatgpt: "https://chatgpt.com",
+  mobbin: "https://mobbin.com",
+  laws: "https://lawsofux.com",
+  nng: "https://www.nngroup.com/articles/",
+  heuristics: "https://www.nngroup.com/articles/ten-usability-heuristics/",
+  interviews: "https://www.nngroup.com/articles/user-interviews/",
+  testing: "https://www.nngroup.com/articles/usability-testing-101/",
+  forms: "https://forms.google.com",
+  figjam: "https://www.figma.com/figjam/",
+  behance: "https://www.behance.net",
+  claudeCode: "https://claude.com/product/claude-code",
+};
+const a = (href, text) => `<a href="${href}" target="_blank" rel="noopener">${text}</a>`;
+
+const WEEKS = [
+  {
+    title: "Week 1: Is this for you?",
+    goal: "See what product designers in Nigeria actually do all day, and decide if you want 7 more weeks of this.",
+    tasks: [
+      `Make a free ${a(L.figma, "Figma account")}`,
+      `Make a free ${a(L.chatgpt, "ChatGPT")} or ${a(L.claude, "Claude")} account`,
+      `Take ${a(L.uxdi, "UX Design Institute's free intro course")} (7 short videos, about 40 minutes)`,
+      `Do at least half of ${a(L.cf, "CareerFoundry's free UX short course")}`,
+      `Find 3 product designers at Nigerian companies whose apps you use (Moniepoint, PiggyVest, Kuda, Paystack, Chowdeck) on Twitter or LinkedIn. Follow them and read what they post for a week. That's the job`,
+      `Keep a frustration log: 5 moments from your week. A USSD session timing out. "Transaction failed" but you were debited. A portal crashing on deadline day. An app asking for your BVN twice. One line each: what happened, and what you expected to happen`,
+    ],
+    check: [
+      "Can I explain UX, UI and product design in one sentence each?",
+      "Did I actually enjoy writing the frustration log?",
+      `Did I post my first "I'm learning product design" post?`,
+    ],
+  },
+  {
+    title: "Week 2: Learn Figma",
+    goal: "Get comfortable enough in Figma that the tool stops getting in your way.",
+    tasks: [
+      `Complete Figma's official ${a(L.figmaCourse, "Figma Design for Beginners")} course (33 short chapters, about 3 hours)`,
+      "Master the four things everything else builds on: frames, auto layout, components, prototyping",
+      "Learn 10 keyboard shortcuts and force yourself to use them",
+      `Final task: screenshot the home screen of the bank app you use most, then rebuild it in Figma from scratch. Use auto layout everywhere. Post it as "recreation of [app], for practice"`,
+    ],
+    check: [
+      "Can I build a card with auto layout without opening a tutorial?",
+      "If I make my bank screen narrower, does it resize without breaking?",
+      "Did I post it?",
+    ],
+  },
+  {
+    title: "Week 3: Train your eye on Nigerian apps",
+    goal: "Learn why some screens feel trustworthy and others feel scammy, using the apps already on your phone.",
+    tasks: [
+      "Learn the UI basics: spacing (multiples of 8), type hierarchy (2 fonts max), color (one main color plus neutrals), alignment, contrast",
+      "Screenshot your favorite flows from 3 Nigerian apps you have, such as Chowdeck, Moniepoint, Kuda or PiggyVest. Lay them side by side in Figma",
+      "Tear them down. Count the taps to the final action in each. Where did you feel unsure? Which one tells you clearly what happened after?",
+      "Recreate 3 of those screens pixel by pixel. Label them as recreations when you post",
+      `Compare one flow with a global app on ${a(L.mobbin, "Mobbin")} (free tier), such as WhatsApp or Spotify. What do they do that Nigerian apps don't, and the other way round?`,
+    ],
+    check: [
+      "Can I say specifically why one app feels safer than another: the copy, the spacing, the feedback?",
+      "Are my recreations close enough that someone has to look twice?",
+      "Did I post the teardown?",
+    ],
+  },
+  {
+    title: "Week 4: How Nigerian users think",
+    goal: `Move from "does it look nice?" to "does it work for the average Nigerian user?"`,
+    tasks: [
+      "Read Steve Krug's <em>Don't Make Me Think</em>",
+      `Go through ${a(L.laws, "lawsofux.com")} and pick 5 laws. Find an example of each one in a Nigerian app`,
+      `Read 3 articles on NN/g: ${a(L.heuristics, "usability heuristics")}, ${a(L.interviews, "user interviews")}, ${a(L.testing, "usability testing")}`,
+      `Write your "Nigerian constraints" checklist, one page, from your own life plus a quick poll in a WhatsApp group you're already in. Cover: network dropping mid-transaction, data cost (heavy apps get deleted), low-storage phones, shared phones, fear of fraud. This page becomes the checklist for your project`,
+    ],
+    check: [
+      "Can I explain 5 laws of UX using Nigerian app examples?",
+      "Is my constraints checklist specific enough to judge a design against?",
+    ],
+  },
+  {
+    title: "Week 5: Pick a real Nigerian problem and gather evidence",
+    goal: "One flow, one real problem, and real evidence from real users, all gathered online. No face-to-face interviews needed. Weeks 5 to 8 are all this one project.",
+    briefs: [
+      ["Failed but debited", "what happens after a transfer fails and the money is gone"],
+      ["Data for someone else", "buying airtime or data for a parent in another state"],
+      ["BVN/NIN onboarding", "signing up for a fintech app for the first time"],
+      ["Ajo", "running a rotating savings group with friends or colleagues"],
+      ["Instagram vendor checkout", `DM, ask for price, transfer, "send receipt," wait for delivery`],
+    ],
+    tasks: [
+      "Do desk research with AI: ask Claude or ChatGPT what people commonly complain about in this flow. Then check every claim against real receipts: Play Store reviews of Nigerian apps and complaints on Twitter",
+      `Run a short survey: 5 to 7 questions in a free ${a(L.forms, "Google Form")}. Include at least one open question, such as "Tell me about the last time this went wrong." Share it in WhatsApp and Telegram groups you're already in and on your status. Aim for 15+ responses`,
+      "Build a quotes bank: collect 20 real complaints, word for word, with links. Look in 1 and 2-star Play Store reviews and Twitter replies to the app's support account. Patterns across 20 strangers beat one long chat",
+      "Screenshot every step of the current flow",
+    ],
+    check: [
+      "Do I have real evidence (15+ survey responses, 20 quotes), not just AI's summary?",
+      "Did at least one finding surprise me?",
+      "Is my flow small enough to design properly in 2 weeks?",
+    ],
+  },
+  {
+    title: "Week 6: Define the problem, then sketch",
+    goal: "Turn messy research notes into one sharp problem, then explore solutions cheaply on paper.",
+    tasks: [
+      `Put every survey answer and quote on a sticky note in ${a(L.figjam, "FigJam")}. Ask AI to suggest groupings, then overrule it wherever your evidence says otherwise. You have the receipts; it doesn't`,
+      `Write one problem statement: "[User] needs a way to [goal] because [what's in the way]." Example: "Market traders need to know within seconds whether a failed transfer will be reversed, because the uncertainty makes them refuse transfers and lose sales"`,
+      "List your solution ideas on an impact vs. effort grid. Do the high-impact, low-effort ones first",
+      "Sketch 3 <em>different</em> solutions on paper, 10 minutes each",
+      "Turn the best one into grayscale wireframes in Figma. Check them against your Nigerian constraints checklist: what does the screen show when the network drops halfway?",
+      `Send the wireframes on WhatsApp to a friend or family member who uses this kind of app, and ask for a voice note or text: "What would you tap first, and what confuses you?"`,
+    ],
+    check: [
+      "Can I say the problem in one sentence that names a real person and a real cost?",
+      "Do my wireframes handle the network failing?",
+      "Has a real user reacted to them?",
+    ],
+  },
+  {
+    title: "Week 7: Design it properly and test it",
+    goal: "Polished screens that hold up in real Nigerian conditions, tested by real people.",
+    tasks: [
+      "Apply your Week 3 basics: an 8-point grid, 1 typeface, 1 main color, consistent components",
+      "Design the unhappy paths first: network drop, failed transaction, wrong account name, insufficient balance, a session that times out. In Nigeria these happen every day",
+      "Link the screens into a clickable prototype and open it on a mid-range Android phone, not only your laptop. Is the text readable outside in sunlight? Can you reach the buttons with one thumb?",
+      `Test remotely with 3 people you know. Send the prototype link on WhatsApp with one real task ("Send ₦5,000 to your cousin"). Ask them to screen-record while they try it (most Android phones have a built-in recorder) and say what they're thinking out loud. Note every place they hesitate`,
+      "Fix the top 3 problems. Save a before-and-after of each",
+      `Optional stretch: use a free coding agent such as ${a(L.claudeCode, "Claude Code")} to turn one screen into a working web page. It's a preview of what the Druids cohort teaches`,
+    ],
+    check: [
+      "Did I design at least 3 error states?",
+      "Did people finish the task without my help?",
+      "Do I have 3 before-and-afters?",
+    ],
+  },
+  {
+    title: "Week 8: Write the case study and go public",
+    goal: "Tell the story so a stranger, Nigerian or foreign, understands your thinking in 3 minutes. Hiring managers care more about your reasoning than about polished screens.",
+    tasks: [
+      "Structure: the problem, what your research showed, the options you considered, what you chose and why, what testing changed, and what you'd do next",
+      `Add a short context section for readers outside Nigeria. A remote client won't know what BVN, POS agents or "failed but debited" mean. Explaining your market well is a skill they pay for`,
+      "Lead with the final screens, then show how you got there. Use visuals and before-and-afters, not walls of text",
+      `Publish it on ${a(L.behance, "Behance")}, then share it as a Twitter thread and a LinkedIn post`,
+    ],
+    check: [
+      "Can a stranger get the problem within 30 seconds of opening it?",
+      "Is it published, with a link I can send anyone?",
+    ],
+  },
+];
+
+const RESOURCES = [
+  [L.uxdi, "UX Design Institute intro course", "7 short video lessons", "1"],
+  [L.cf, "CareerFoundry UX short course", "Beginner email and web course", "1"],
+  ["https://t.me/+QulYGlv8tvc0NGE0", "Druids community", "Free Telegram design community", "1 onward"],
+  ["https://friends.figma.com/lagos", "Friends of Figma Lagos", "Local Figma community, with chapters in other cities too", "1 onward"],
+  [L.figmaCourse, "Figma Design for Beginners", "Figma's official course, about 3 hours", "2"],
+  [L.mobbin, "Mobbin", "Library of real app screens and flows", "3"],
+  [null, "<em>Don't Make Me Think</em>, Steve Krug", "Usability book", "4"],
+  [L.laws, "Laws of UX", "Design psychology, bite-sized", "4"],
+  [L.nng, "Nielsen Norman Group articles", "The industry's UX reference", "4 onward"],
+  ["https://adplist.org/mentors/expertise/product-design/lagos", "ADPList: product design mentors in Lagos", "Free 1:1 video sessions", "4 and 8"],
+  ["https://druids.design/mentorship", "Druids mentorship", "2-week live cohort: build with AI, clients, pricing, interviews", "After 8"],
+  ["https://hng.tech/internship", "HNG Internship", "Team-based internship with a product design track, not for beginners", "After 8"],
+];
+
+/* ---------- storage (fails quietly in private windows) ---------- */
+const KEY = "uxbgn2026-progress-v1";
+let state = {};
+try { state = JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) { state = {}; }
+const save = () => { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} };
+
+/* ---------- render ---------- */
+const weeksEl = document.getElementById("weeks");
+const list = (items, wi, kind) =>
+  `<ul class="tasks">` + items.map((t, ti) => {
+    const id = `w${wi + 1}-${kind}${ti + 1}`;
+    return `<li><label><input type="checkbox" data-id="${id}" data-week="${wi}"${state[id] ? " checked" : ""}><span>${t}</span></label></li>`;
+  }).join("") + `</ul>`;
+
+weeksEl.innerHTML = WEEKS.map((w, wi) => `
+  <section id="week-${wi + 1}" data-week="${wi}">
+    <div class="week-head">
+      <h2>${w.title}</h2>
+      <span class="frac" data-frac="${wi}"></span>
+    </div>
+    <p class="goal">${w.goal}</p>
+    ${w.briefs ? `<p class="then">Pick one of these, or one from your frustration log:</p>
+      <ul class="briefs">${w.briefs.map(([b, d]) => `<li><b>${b}</b>${d}</li>`).join("")}</ul>
+      <p class="then">Then:</p>` : ""}
+    <div class="card">${list(w.tasks, wi, "t")}</div>
+    <div class="sunday">
+      <p class="sunday-title">Sunday check</p>
+      <div class="card">${list(w.check, wi, "c")}</div>
+    </div>
+  </section>`).join("");
+
+document.getElementById("resource-rows").innerHTML = RESOURCES.map(([href, name, what, wk]) =>
+  `<tr><td>${href ? a(href, name) : name}</td><td>${what}</td><td>${wk}</td></tr>`).join("");
+
+const shortName = (t) => t.split(":")[0];
+document.getElementById("side-nav").innerHTML =
+  `<p class="group">Start here</p><ol><li><a href="#how"><span>How this works</span></a></li></ol>
+   <p class="group">The 8 weeks</p><ol>` +
+  WEEKS.map((w, wi) => `<li><a href="#week-${wi + 1}" data-nav="${wi}"><span>${shortName(w.title)}</span><span class="frac" data-frac="${wi}"></span></a></li>`).join("") +
+  `</ol><p class="group">Then</p><ol><li><a href="#after"><span>After Week 8</span></a></li><li><a href="#resources"><span>Resources</span></a></li></ol>`;
+
+document.getElementById("jump-nav").innerHTML =
+  `<a href="#how">Start</a>` +
+  WEEKS.map((w, wi) => `<a href="#week-${wi + 1}" data-jump="${wi}">Wk ${wi + 1}</a>`).join("") +
+  `<a href="#after">After</a><a href="#resources">Resources</a>`;
+
+/* ---------- progress ---------- */
+const boxes = [...document.querySelectorAll('.tasks input[type="checkbox"]')];
+function refresh() {
+  const total = boxes.length;
+  const done = boxes.filter(b => b.checked).length;
+  document.getElementById("total-count").textContent = `${done} of ${total} done`;
+  document.getElementById("total-bar").style.width = `${(done / total) * 100}%`;
+  WEEKS.forEach((_, wi) => {
+    const wb = boxes.filter(b => b.dataset.week == wi);
+    const wd = wb.filter(b => b.checked).length;
+    const full = wd === wb.length;
+    document.querySelectorAll(`[data-frac="${wi}"]`).forEach(el => {
+      el.textContent = `${wd}/${wb.length}`;
+      el.classList.toggle("full", full);
+    });
+    const j = document.querySelector(`[data-jump="${wi}"]`);
+    if (j) j.classList.toggle("full", full);
+  });
+}
+boxes.forEach(b => b.addEventListener("change", () => {
+  if (b.checked) state[b.dataset.id] = true; else delete state[b.dataset.id];
+  save(); refresh();
+}));
+document.getElementById("reset").addEventListener("click", () => {
+  if (!confirm("Untick everything and start over?")) return;
+  state = {}; save(); boxes.forEach(b => (b.checked = false)); refresh();
+});
+refresh();
+
+/* ---------- copy prompt ---------- */
+document.getElementById("copy-prompt").addEventListener("click", async (e) => {
+  const text = document.getElementById("prompt").textContent;
+  try { await navigator.clipboard.writeText(text); e.target.textContent = "Copied"; }
+  catch (err) { e.target.textContent = "Select and copy"; }
+  setTimeout(() => (e.target.textContent = "Copy"), 2000);
+});
+
+/* ---------- highlight current week in side nav ---------- */
+if ("IntersectionObserver" in window) {
+  const navLinks = [...document.querySelectorAll("[data-nav]")];
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(en => {
+      if (en.isIntersecting) {
+        navLinks.forEach(l => l.classList.toggle("current", l.dataset.nav === en.target.dataset.week));
+      }
+    });
+  }, { rootMargin: "-30% 0px -60% 0px" });
+  document.querySelectorAll("section[data-week]").forEach(s => io.observe(s));
+}
+</script>
+</body>
+</html>
